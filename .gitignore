@@ -1,0 +1,7 @@
+.python-version
+/.venv/
+archive/
+edges - コピー*
+data/
+.vscode/settings.json
+log_def.txt

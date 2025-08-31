@@ -1,0 +1,42 @@
+{
+    // IntelliSense を使用して利用可能な属性を学べます。
+    // 既存の属性の説明をホバーして表示します。
+    // 詳細情報は次を確認してください: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "train cifar-10",
+            "type": "debugpy",
+            "python": ".venv/scripts/python.exe",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "program": "nematode_circuit_cnn_integrated.py",
+            "console": "integratedTerminal"
+        },
+       {
+            "name": "train cifar-10 edges.json",
+            "type": "debugpy",
+            "python": ".venv/scripts/python.exe",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "program": "nematode_circuit_cnn_integrated.py",
+            "args": [
+                "--epochs","200","--edges_json","edges.json"
+            ],            
+        },
+        {
+            "name": "train cifar-10: 過学習。誤差更新 動作確認用",
+            "type": "debugpy",
+            "python": ".venv/scripts/python.exe",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "program": "nematode_circuit_cnn_integrated.py",
+            "args": [
+                "--epochs","50","--bs","256","--c","32",
+                "--optimizer","sgd","--lr","0.05"
+            ],
+        }
+    ]
+}
