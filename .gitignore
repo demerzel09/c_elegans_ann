@@ -5,3 +5,5 @@ edges - コピー*
 data/
 .vscode/settings.json
 log_def.txt
+__pycache__/
+results/

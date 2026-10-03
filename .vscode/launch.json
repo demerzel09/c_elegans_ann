@@ -1,42 +1,55 @@
 {
-    // IntelliSense を使用して利用可能な属性を学べます。
-    // 既存の属性の説明をホバーして表示します。
-    // 詳細情報は次を確認してください: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "train cifar-10",
             "type": "debugpy",
-            "python": ".venv/scripts/python.exe",
             "request": "launch",
+            "python": "${workspaceFolder}/.venv/Scripts/python.exe",
             "cwd": "${workspaceFolder}",
-            "program": "nematode_circuit_cnn_integrated.py",
-            "console": "integratedTerminal"
-        },
-       {
-            "name": "train cifar-10 edges.json",
-            "type": "debugpy",
-            "python": ".venv/scripts/python.exe",
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
+            "program": "${workspaceFolder}/launch_training.py",
             "console": "integratedTerminal",
-            "program": "nematode_circuit_cnn_integrated.py",
+            "name": "BP",
             "args": [
-                "--epochs","200","--edges_json","edges.json"
-            ],            
+                "--method",
+                "bp",
+                "--action",
+                "${input:trainingAction}"
+            ]
         },
         {
-            "name": "train cifar-10: 過学習。誤差更新 動作確認用",
             "type": "debugpy",
-            "python": ".venv/scripts/python.exe",
             "request": "launch",
+            "python": "${workspaceFolder}/.venv/Scripts/python.exe",
             "cwd": "${workspaceFolder}",
+            "program": "${workspaceFolder}/launch_training.py",
             "console": "integratedTerminal",
-            "program": "nematode_circuit_cnn_integrated.py",
+            "name": "PC-ALM",
             "args": [
-                "--epochs","50","--bs","256","--c","32",
-                "--optimizer","sgd","--lr","0.05"
+                "--method",
+                "pcalm",
+                "--output",
+                "results/pcalm_lr_only_full",
+                "--action",
+                "${input:trainingAction}"
+            ]
+        }
+    ],
+    "inputs": [
+        {
+            "id": "trainingAction",
+            "type": "pickString",
+            "description": "実行方法を選択",
+            "options": [
+                {
+                    "label": "再開：保存したモデルから続ける",
+                    "value": "resume"
+                },
+                {
+                    "label": "新規：最初から200 epoch学習",
+                    "value": "new"
+                }
             ],
+            "default": "new"
         }
     ]
 }
